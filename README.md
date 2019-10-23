@@ -1,8 +1,12 @@
 # [ArchitectureComponentsTest]( https://developer.android.google.cn/topic/libraries/architecture )——架构组件的一些demo
 
 
+## Demos
 
-#### 导入相关
+* [RoomTest](/RoomTest)  Room数据库Demo
+* [DataBindingTest](/DataBindingTest)  数据绑定Demo
+
+## 导入相关
 
 1. 根目录的**`build.gradle`**加入`google repository`
 
@@ -44,10 +48,3 @@
    // Testing
    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
    ```
-
-
-
-#### Demos
-
-* [RoomTest](/RoomTest)  Room数据库Demo
-* [DataBindingTest](/DataBindingTest)  数据绑定Demo

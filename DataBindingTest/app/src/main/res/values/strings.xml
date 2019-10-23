@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">DataBindingTest</string>
+    <string name="likes">Likes</string>
+    <string name="last_name_label">LastName</string>
+    <string name="name_label">Name</string>
+    <string name="like">like</string>
+    <string name="profile_avatar_cd">Profile\\\'s avatar</string>
+    <string name="toseconddemo">ToSecondDemo</string>
+    <string name="start">start</string>
+    <string name="pause">pause</string>
+    <string name="reset">reset</string>
+
+    <string name="minus_sign">-</string>
+    <string name="plus_sign">+</string>
+    <string name="sets_format">Sets: %d/%d</string>
+    <string name="prefs_timePerWorkSet">SHARED_PREFS_TIMEPERWORKSET</string>
+    <string name="prefs_timePerRestSet">SHARED_PREFS_TIMEPERRESTSET</string>
+    <string name="prefs_numberOfSets">SHARED_PREFS_NUMBEROFSETS</string>
+</resources>

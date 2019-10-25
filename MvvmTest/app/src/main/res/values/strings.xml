@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MvvmTest</string>
+    <string name="stu_id">id:%d</string>
+
+    <string name="str_stu_list">学生列表</string>
+    <string name="str_add_student">添加学生</string>
+    <string name="str_update_student">修改信息</string>
+    <string name="str_delete_student">删除学生信息</string>
+    <string name="str_id">学号</string>
+    <string name="str_name">姓名</string>
+    <string name="str_major">专业</string>
+    <string name="img_content_description">这是一张图片</string>
+    <string name="ensure">确定</string>
+    <string name="add_stu">添加学生</string>
+    <string name="modify_stu">修改信息</string>
+    <string name="modify">修改</string>
+    <string name="delete">删除</string>
+    <string name="cancel">取消</string>
+</resources>

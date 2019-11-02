@@ -5,6 +5,8 @@
 
 * [RoomTest](/RoomTest)  Room数据库Demo
 * [DataBindingTest](/DataBindingTest)  数据绑定Demo
+* [LifeCycleTest](/LifeCycleTest) LifeCycleTestDemo
+* [MvvmTest](/MvvmTest)  Mvvm架构Demo
 
 ## 导入相关
 

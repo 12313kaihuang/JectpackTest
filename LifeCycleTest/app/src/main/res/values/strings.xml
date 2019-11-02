@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LifeCycleTest</string>
+
+    <string name="seconds">%d seconds elapsed</string>
+    <string name="location">location</string>
+    <string name="initial_name">no one</string>
+
+    <string name="saved_in_vm">Saved in ViewModel: %s</string>
+</resources>

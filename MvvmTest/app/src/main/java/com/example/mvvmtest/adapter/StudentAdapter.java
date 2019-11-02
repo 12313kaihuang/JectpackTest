@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mvvmtest.R;
 import com.example.mvvmtest.data.StudentsViewModel;
 import com.example.mvvmtest.databinding.ItemStudentBinding;
 import com.example.mvvmtest.entity.Student;
+import com.example.mvvmtest.ui.MainActivity;
 import com.example.mvvmtest.util.Utils;
 
 import java.util.List;
@@ -40,6 +42,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         this.studentsViewModel = studentsViewModel;
         this.mLayoutInflater = LayoutInflater.from(mContext);
         this.mStudentList = studentsViewModel.getStudentList().getValue();
+        studentsViewModel.getStudentList().observe((MainActivity)mContext, new Observer<List<Student>>() {
+            @Override
+            public void onChanged(List<Student> students) {
+                notifyDataSetChanged();
+                Log.d(TAG, "onChanged:  size = "+students.size());
+            }
+        });
     }
 
 //    public void setStudentList(List<Student> mStudentList) {

@@ -34,8 +34,8 @@ public class SimpleViewModel extends ViewModel {
         return likes;
     }
 
-    public void setLikes(MutableLiveData<Integer> likes) {
-        this.likes = likes;
+    public void setLikes(Integer likes) {
+        this.likes.setValue(likes);
     }
 
     public void onLike() {

@@ -7,6 +7,7 @@
         <variable
             name="viewModel"
             type="com.example.mvvmtest.data.StudentsViewModel" />
+
     </data>
 
     <LinearLayout
@@ -19,10 +20,16 @@
             android:id="@+id/action_bar_layout"
             layout="@layout/layout_action_bar"/>
 
+        <TextView
+            android:text="@{Integer.toString(viewModel.studentList.size())}"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 </layout>

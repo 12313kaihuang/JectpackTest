@@ -4,11 +4,15 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.yu.hu.roomtest.dao.StudentDao;
 import com.yu.hu.roomtest.db.StudentRoomDatabase;
 import com.yu.hu.roomtest.entity.Student;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 
 /**
  * 项目名：RoomTest
@@ -29,36 +33,43 @@ public class StudentRepository2 {
         mStudentDao = db.studentDao();
     }
 
-    public List<Student> getAllStudents() {
-        List<Student> students = mStudentDao.getAlphabetizedStudents();
-        Log.d(TAG, "getAllStudents: students.size = " + students.size() + ", " + students);
-        return students;
+    public LiveData<List<Student>> getAllStudents() {
+        return mStudentDao.getLiveStudents();
+    }
+
+    public Flowable<Student> findStudentById(long id) {
+        return mStudentDao.findStudnetById(id);
     }
 
     public void insert(Student student) {
         //必须在非UI线程上调用dao的insert方法，否则您的应用程序将崩溃。
         //所以这里采用了AsyncTask来进行插入操作
-        //new insertAsyncTask(mStudentDao).execute(student);
         Log.d(TAG, "insert: student = " + student);
-        mStudentDao.insert(student);
+        new insertAsyncTask(mStudentDao).execute(student);
     }
 
     public Student findById(long id) {
         return mStudentDao.findById(id);
     }
 
-    public void delete(Student student) {
-        mStudentDao.delete(student.getId());
+    public void delete(final Student student) {
+        new deleteAsyncTask(mStudentDao).execute(student.getId());
     }
 
-    private static class mAsyncTask extends AsyncTask<Runnable, Void, Void> {
+    private static class deleteAsyncTask extends AsyncTask<Long, Void, Void> {
+
+        private StudentDao mAsyncTaskDao;
+
+        deleteAsyncTask(StudentDao dao) {
+            this.mAsyncTaskDao = dao;
+        }
+
         @Override
-        protected Void doInBackground(Runnable... runnables) {
-            runnables[0].run();
+        protected Void doInBackground(Long... longs) {
+            mAsyncTaskDao.delete(longs[0]);
             return null;
         }
     }
-
 
     private static class insertAsyncTask extends AsyncTask<Student, Void, Void> {
 

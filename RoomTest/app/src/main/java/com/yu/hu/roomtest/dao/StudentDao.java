@@ -4,10 +4,13 @@ import com.yu.hu.roomtest.entity.Student;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import io.reactivex.Flowable;
 
 /**
  * 项目名：RoomTest
@@ -32,6 +35,12 @@ public interface StudentDao {
     @Query("SELECT * FROM tb_student ORDER BY id ASC")
     List<Student> getAlphabetizedStudents();
 
+    @Query("SELECT * FROM tb_student ORDER BY id ASC")
+    LiveData<List<Student>> getLiveStudents();
+
     @Query("SELECT * FROM tb_student WHERE id = :id")
     Student findById(long id);
+
+    @Query("SELECT * FROM tb_student WHERE id = :id")
+    Flowable<Student> findStudnetById(long id);
 }

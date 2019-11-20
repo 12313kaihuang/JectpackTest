@@ -12,8 +12,14 @@ import android.widget.TextView;
 
 import com.yu.hu.roomtest.R;
 import com.yu.hu.roomtest.entity.Student;
-import com.yu.hu.roomtest.repository.StudentRepository;
+import com.yu.hu.roomtest.repository.StudentRepository2;
 import com.yu.hu.roomtest.util.Utils;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author hy
@@ -45,7 +51,7 @@ public class AddStudentActivity extends BaseActivity {
     private ImageView mIvOption;
     private Button mAddBtn;
 
-    private StudentRepository mStudentRepository;
+    private StudentRepository2 mStudentRepository;
 
     @Override
     protected int getLayoutId() {
@@ -54,7 +60,7 @@ public class AddStudentActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        this.mStudentRepository = new StudentRepository(getApplication());
+        this.mStudentRepository = new StudentRepository2(getApplication());
 
         Intent intent = getIntent();
         String startType = intent.getStringExtra(KEY_START_TYPE);
@@ -135,6 +141,9 @@ public class AddStudentActivity extends BaseActivity {
             Utils.showShortToast(this, "专业不能为空");
             return false;
         }
+
+
+
         return true;
     }
 

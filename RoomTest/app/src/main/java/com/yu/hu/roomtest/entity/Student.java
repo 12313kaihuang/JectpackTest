@@ -2,12 +2,16 @@ package com.yu.hu.roomtest.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.Objects;
 
 /**
  * 项目名：RoomTest
@@ -25,7 +29,7 @@ public class Student implements Parcelable {
 
     @NonNull  //不能为null
     @ColumnInfo(name = "first_name")  //指定列名为first_name
-    private String firstName;
+    private String firstName = "";
 
     private String lastName;
 
@@ -37,6 +41,8 @@ public class Student implements Parcelable {
     public Student() {
     }
 
+    //room 默认使用无参构造函数，添加一个ignore注解便于区分？（其实是为了消除警告 = =）
+    @Ignore
     public Student(long id, @NonNull String firstName, String major) {
         this.id = id;
         this.firstName = firstName;
@@ -45,7 +51,7 @@ public class Student implements Parcelable {
 
     protected Student(Parcel in) {
         id = in.readLong();
-        firstName = in.readString();
+        firstName = Objects.requireNonNull(in.readString());
         lastName = in.readString();
         major = in.readString();
         fromWhere = in.readString();
@@ -126,9 +132,8 @@ public class Student implements Parcelable {
             if (this == student) return true;
             return id == student.id
                     && firstName.equals(student.firstName)
-                    && lastName.equals(student.lastName)
-                    && major.equals(student.major)
-                    && fromWhere.equals(student.fromWhere);
+                    && major != null && major.equals(student.major)
+                    && fromWhere != null && fromWhere.equals(student.fromWhere);
         } else {
             return false;
         }

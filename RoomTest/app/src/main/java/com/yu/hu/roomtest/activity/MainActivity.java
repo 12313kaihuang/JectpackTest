@@ -1,6 +1,7 @@
 package com.yu.hu.roomtest.activity;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yu.hu.roomtest.R;
-import com.yu.hu.roomtest.adapter.StudentAdapter;
 import com.yu.hu.roomtest.adapter.StudentItemDecoration;
+import com.yu.hu.roomtest.adapter.StudentListAdapter;
 import com.yu.hu.roomtest.entity.Student;
-import com.yu.hu.roomtest.repository.StudentRepository;
+import com.yu.hu.roomtest.repository.StudentRepository2;
 
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class MainActivity extends BaseActivity {
     protected static final String TAG = "MainActivity";
 
 
-    private StudentRepository mStudentRepository;
-    private StudentAdapter mStudentAdapter;
+    private StudentRepository2 mStudentRepository;
+    private StudentListAdapter mStudentAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -47,13 +48,19 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        this.mStudentRepository = new StudentRepository(getApplication());
-        List<Student> students = mStudentRepository.getAllStudents();
+        this.mStudentRepository = new StudentRepository2(getApplication());
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new StudentItemDecoration(this, 3));
-        this.mStudentAdapter = new StudentAdapter(this, students,mStudentRepository);
+        this.mStudentAdapter = new StudentListAdapter(this, mStudentRepository);
         recyclerView.setAdapter(mStudentAdapter);
+
+        mStudentRepository.getAllStudents().observe(this, new Observer<List<Student>>() {
+            @Override
+            public void onChanged(List<Student> students) {
+                mStudentAdapter.submitList(students);
+            }
+        });
     }
 
     //添加学生
@@ -69,19 +76,19 @@ public class MainActivity extends BaseActivity {
         if (requestCode != AddStudentActivity.REQUEST_CODE) {
             return;
         }
-        if (resultCode == AddStudentActivity.RESULT_CODE_Add) {
-            Student student = null;
-            if (data != null) {
-                student = data.getParcelableExtra(AddStudentActivity.KEY_STUDENT);
-            }
-
-            if (student == null) {
-                mStudentAdapter.setStudentList(mStudentRepository.getAllStudents());
-            } else {
-                mStudentAdapter.addStudent(student);
-            }
-        } else if (resultCode == AddStudentActivity.RESULT_CODE_MODIFY) {
-            mStudentAdapter.setStudentList(mStudentRepository.getAllStudents());
-        }
+//        if (resultCode == AddStudentActivity.RESULT_CODE_Add) {
+//            Student student = null;
+//            if (data != null) {
+//                student = data.getParcelableExtra(AddStudentActivity.KEY_STUDENT);
+//            }
+//
+//            if (student == null) {
+//                mStudentAdapter.setStudentList(mStudentRepository.getAllStudents());
+//            } else {
+//                mStudentAdapter.addStudent(student);
+//            }
+//        } else if (resultCode == AddStudentActivity.RESULT_CODE_MODIFY) {
+//            mStudentAdapter.setStudentList(mStudentRepository.getAllStudents());
+//        }
     }
 }

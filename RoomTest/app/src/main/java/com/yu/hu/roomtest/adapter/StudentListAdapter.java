@@ -21,11 +21,8 @@ import com.yu.hu.roomtest.activity.AddStudentActivity;
 import com.yu.hu.roomtest.activity.MainActivity;
 import com.yu.hu.roomtest.dialog.CustomDialog;
 import com.yu.hu.roomtest.entity.Student;
-import com.yu.hu.roomtest.repository.StudentRepository;
+import com.yu.hu.roomtest.repository.StudentRepository2;
 import com.yu.hu.roomtest.util.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 项目名：RoomTest
@@ -41,9 +38,9 @@ public class StudentListAdapter extends ListAdapter<Student, StudentListAdapter.
     private static final String TAG = "StudentAdapter";
 
     private Context mContext;
-    private StudentRepository mStudentRepository;
+    private StudentRepository2 mStudentRepository;
 
-    public StudentListAdapter(Context context, StudentRepository studentRepository) {
+    public StudentListAdapter(Context context, StudentRepository2 studentRepository) {
         super(new DiffUtil.ItemCallback<Student>() {
             @Override
             public boolean areItemsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
@@ -72,6 +69,7 @@ public class StudentListAdapter extends ListAdapter<Student, StudentListAdapter.
         holder.mTvId.setText(mContext.getString(R.string.stu_id, student.getId()));
         holder.mTvName.setText(student.getFirstName());
         holder.mTvMajor.setText(student.getMajor());
+
 
         final int index = position % 5 + 1;
         int resId = mContext.getResources().getIdentifier("default_icon" + index, "drawable", mContext.getPackageName());

@@ -16,18 +16,15 @@ import java.util.List;
  * 文件名：StudentRepository
  * 创建者：HY
  * 创建时间：2019/10/13 19:38
- * 描述：  改用LiveData控制
- *
- * @see StudentRepository2
+ * 描述：  TODO
  */
-@Deprecated
-public class StudentRepository {
+public class StudentRepository2 {
 
     private static final String TAG = "StudentRepository";
 
     private StudentDao mStudentDao;
 
-    public StudentRepository(Application application) {
+    public StudentRepository2(Application application) {
         StudentRoomDatabase db = StudentRoomDatabase.getDatabase(application);
         mStudentDao = db.studentDao();
     }

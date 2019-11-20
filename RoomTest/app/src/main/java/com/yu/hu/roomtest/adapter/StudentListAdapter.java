@@ -11,9 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yu.hu.roomtest.activity.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.yu.hu.roomtest.R;
 import com.yu.hu.roomtest.activity.AddStudentActivity;
+import com.yu.hu.roomtest.activity.MainActivity;
 import com.yu.hu.roomtest.dialog.CustomDialog;
 import com.yu.hu.roomtest.entity.Student;
 import com.yu.hu.roomtest.repository.StudentRepository;
@@ -22,9 +27,6 @@ import com.yu.hu.roomtest.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * 项目名：RoomTest
  * 包名：  com.yu.hu.roomtest
@@ -32,36 +34,29 @@ import androidx.recyclerview.widget.RecyclerView;
  * 创建者：HY
  * 创建时间：2019/10/13 20:23
  * <p>
- * 老版本Adapter
- *
- * @see StudentListAdapter
+ * 使用{@link ListAdapter}配合Room更好的实现
  */
-@Deprecated
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
+public class StudentListAdapter extends ListAdapter<Student, StudentListAdapter.ViewHolder> {
 
     private static final String TAG = "StudentAdapter";
 
     private Context mContext;
     private StudentRepository mStudentRepository;
-    private List<Student> mStudentList;
 
+    public StudentListAdapter(Context context, StudentRepository studentRepository) {
+        super(new DiffUtil.ItemCallback<Student>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
+                return oldItem.getId() == newItem.getId();
+            }
 
-    public StudentAdapter(Context context, List<Student> studentList, StudentRepository studentRepository) {
+            @Override
+            public boolean areContentsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
+                return oldItem.equals(newItem);
+            }
+        });
         this.mContext = context;
-        this.mStudentList = studentList;
         this.mStudentRepository = studentRepository;
-    }
-
-    public void setStudentList(List<Student> studentList) {
-        this.mStudentList = studentList;
-        notifyDataSetChanged();
-    }
-
-    public void addStudent(Student student) {
-        if (mStudentList == null) mStudentList = new ArrayList<>();
-        mStudentList.add(student);
-        notifyItemInserted(mStudentList.size() - 1);  //这里的位置是被插入的item的位置
-        notifyItemRangeChanged(mStudentList.size() - 1, 1); //防止数据错乱
     }
 
     @NonNull
@@ -73,7 +68,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Student student = mStudentList.get(position);
+        final Student student = getItem(position);
         holder.mTvId.setText(mContext.getString(R.string.stu_id, student.getId()));
         holder.mTvName.setText(student.getFirstName());
         holder.mTvMajor.setText(student.getMajor());
@@ -109,7 +104,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mStudentList.size();
+        return super.getItemCount();
     }
 
     /**
@@ -147,10 +142,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                     @Override
                     public void onBtnClicked(View view) {
                         mStudentRepository.delete(student);
-                        mStudentList.remove(position);
-                        notifyItemRemoved(position);
-                        Log.d(TAG, "onBtnClicked: " + (mStudentList.size() - position + 1));
-                        notifyItemRangeChanged(position, mStudentList.size() - position + 1);
                         Utils.showShortToast(mContext, "删除 " + student.getFirstName());
                     }
                 })

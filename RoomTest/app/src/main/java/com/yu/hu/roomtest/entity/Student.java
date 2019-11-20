@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -115,5 +116,21 @@ public class Student implements Parcelable {
         dest.writeString(lastName);
         dest.writeString(major);
         dest.writeString(fromWhere);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Student) {
+            Student student = (Student) obj;
+            if (this == student) return true;
+            return id == student.id
+                    && firstName.equals(student.firstName)
+                    && lastName.equals(student.lastName)
+                    && major.equals(student.major)
+                    && fromWhere.equals(student.fromWhere);
+        } else {
+            return false;
+        }
     }
 }

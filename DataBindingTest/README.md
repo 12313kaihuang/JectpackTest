@@ -4,7 +4,7 @@
 
 #### 导入
 
-1. 首先在**`app`**的`build.gradle`中引入**`lifecycle components`**
+1. 首先在 **`app`** 的`build.gradle`中引入 **`lifecycle components`**
 
    ```groovy
     // Lifecycle components  2.2.0-beta01
@@ -12,7 +12,7 @@
    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0-beta01"
    ```
 
-2. 在**`app`**的`build.gradle`中开启数据绑定
+2. 在 **`app`** 的`build.gradle`中开启数据绑定
 
    ```groovy
    android {
@@ -29,7 +29,7 @@
 
 1. **java**文件中
 
-   每个布局文件生成一个绑定类。默认情况下，类的名称基于布局文件的名称，将其转换为`Pascal`大小写并向其添加*`Binding`*后缀。上面的布局文件名是， **`activity_main.xml`**相应的生成类是 **`ActivityMainBinding`**。 
+   每个布局文件生成一个绑定类。默认情况下，类的名称基于布局文件的名称，将其转换为`Pascal`大小写并向其添加*`Binding`*后缀。上面的布局文件名是， **`activity_main.xml`** 相应的生成类是 **`ActivityMainBinding`**。 
 
    ```java
    //Activity

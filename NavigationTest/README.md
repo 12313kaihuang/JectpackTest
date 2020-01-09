@@ -313,9 +313,12 @@ ok，到了这里项目就可以正常运行了。
 
 补充
 ---
-
-`defaultNavHost` = true  -- 是否与返回键相关联
-`navGraph`
+* **Activity**中获取**NavController**
+```java
+//activity中获取NavController  第二个参数为navigation的id
+NavController navController = Navigation.findNavController(this, R.id.nav_graph);
+navController.handleDeepLink(new Intent());
+``` 
 
 
 ## 参考文章

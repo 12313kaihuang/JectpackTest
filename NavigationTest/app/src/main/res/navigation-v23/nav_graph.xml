@@ -27,7 +27,6 @@
         android:label="blank_fragment"
         tools:layout="@layout/blank_fragment">
 
-
         <argument
             android:name="text"
             app:argType="string" />
@@ -35,9 +34,11 @@
             android:name="mode"
             app:argType="integer"
             android:defaultValue="0" />
+
         <deepLink
             android:id="@+id/deepLink"
             app:uri="www.mooc.com" />
+
         <deepLink
             android:id="@+id/deepLink2"
             app:uri="huyu.online"

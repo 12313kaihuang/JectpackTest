@@ -40,8 +40,7 @@ dependencies {
 ![](img/nav_graph.png)
 
 2. 向 **Activity** 添加 **NavHost**
-
-   ```xml
+```xml
 <!-- activity_main.xml -->
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,14 +59,14 @@ dependencies {
 
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
-   </androidx.constraintlayout.widget.ConstraintLayout>
-   ```
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 
 下面对三个比较重要的属性做一下解释：
 
 * `android:name` 属性包含 `NavHost` 实现的类名称。
 * `app:navGraph` 属性**将 `NavHostFragment` 与导航图相关联**。导航图会在此 `NavHostFragment` 中指定用户可以导航到的所有目的地。
-* `app:defaultNavHost="true"` 属性确保您的 `NavHostFragment` 会**拦截系统返回按钮**。请注意，**只能有一个默认 `NavHost`**。如果同一布局（例如，双窗格布局）中有多个主机，请**务必仅指定一个默认 `NavHost`**。
+* `app:defaultNavHost="true"` 属性确保您的 `NavHostFragment` 会**拦截系统返回按钮**。请注意，**只能有一个默认 `NavHost`** 。如果同一布局（例如，双窗格布局）中有多个主机，请**务必仅指定一个默认 `NavHost`** 。
 
 3. 设置**起始目的地**
 
@@ -293,7 +292,7 @@ ok，到了这里项目就可以正常运行了。
 混淆
 ---
 
-* 通过**@keep**注解：
+* 通过 **@keep** 注解：
 
   ```java
   @Keep public class ParcelableArg implements Parcelable { ... }

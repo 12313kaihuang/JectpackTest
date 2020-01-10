@@ -7,6 +7,7 @@
 * [DataBindingTest](/DataBindingTest)  数据绑定Demo
 * [LifeCycleTest](/LifeCycleTest) LifeCycleTestDemo
 * [MvvmTest](/MvvmTest)  Mvvm架构Demo
+* [NavigationTest](/NavigationTest) Navigation导航Demo
 
 ## 导入相关
 
@@ -29,6 +30,7 @@
        archLifecycleVersion = '2.2.0-beta01'
        coreTestingVersion = '2.1.0'
        materialVersion = '1.0.0'
+       nav_version = '2.1.0'
    }
    ```
 
@@ -44,9 +46,16 @@
    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
    
+   // navigation
+   implementation "androidx.navigation:navigation-fragment:$rootProject.nav_version"
+   implementation "androidx.navigation:navigation-ui:$rootProject.nav_version"
+   
    // UI
    implementation "com.google.android.material:material:$rootProject.materialVersion"
    
    // Testing
    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
    ```
+
+
+
